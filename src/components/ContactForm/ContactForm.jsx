@@ -2,7 +2,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./ContactForm.module.css";
 
-// Створюємо схему валідації з Yup
 const validationSchema = Yup.object({
   username: Yup.string()
     .required("Name is required")
