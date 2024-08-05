@@ -1,14 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = "";
+// Виправляємо initialState на об'єкт з властивістю name
+const initialState = { name: "" };
 
 const filtersSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
-    setFilter: (state, action) => action.payload,
+    // Змінюємо назву дії на changeFilter відповідно до вимог завдання
+    changeFilter: (state, action) => {
+      state.name = action.payload;
+    },
   },
 });
 
-export const { setFilter } = filtersSlice.actions;
+// Експортуємо дію changeFilter
+export const { changeFilter } = filtersSlice.actions;
 export default filtersSlice.reducer;

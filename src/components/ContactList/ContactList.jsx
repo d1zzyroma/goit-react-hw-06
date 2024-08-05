@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import Contact from "../Contact/Contact";
-import { deleteContact } from "../../redux/contactsSlice"; // Імпортуйте дію deleteContact з вашого slice
+import { deleteContact } from "../../redux/contactsSlice"; 
 import css from "./ContactList.module.css";
 
 const ContactList = () => {
   const dispatch = useDispatch();
   const contactData = useSelector((state) => state.contacts.items);
-  const filter = useSelector((state) => state.filter);
+  const filter = useSelector((state) => state.filter.name);
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
@@ -24,7 +24,7 @@ const ContactList = () => {
   return (
     <ul className={css.list}>
       {visibleContacts.map((element) => (
-        <li key={element.id}>
+        <li key={element.id} className={css.listItem}>
           <Contact
             id={element.id}
             name={element.name}
