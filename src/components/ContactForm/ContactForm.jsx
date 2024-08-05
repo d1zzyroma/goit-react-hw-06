@@ -1,5 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsSlice"; 
 import css from "./ContactForm.module.css";
 
 const validationSchema = Yup.object({
@@ -13,9 +15,11 @@ const validationSchema = Yup.object({
     .max(50, "Phone number must be at most 50 characters"),
 });
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (values, { resetForm }) => {
-    addContact({ name: values.username, number: values.phone });
+    dispatch(addContact({ name: values.username, number: values.phone }));
     resetForm();
   };
 

@@ -1,8 +1,10 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Contact from "../Contact/Contact";
+import { deleteContact } from "../../redux/contactsSlice"; // Імпортуйте дію deleteContact з вашого slice
 import css from "./ContactList.module.css";
 
-const ContactList = ({ deleteContact }) => {
+const ContactList = () => {
+  const dispatch = useDispatch();
   const contactData = useSelector((state) => state.contacts.items);
   const filter = useSelector((state) => state.filter);
 
@@ -15,6 +17,10 @@ const ContactList = ({ deleteContact }) => {
 
   const visibleContacts = getVisibleContacts();
 
+  const handleDeleteContact = (id) => {
+    dispatch(deleteContact(id));
+  };
+
   return (
     <ul className={css.list}>
       {visibleContacts.map((element) => (
@@ -23,7 +29,7 @@ const ContactList = ({ deleteContact }) => {
             id={element.id}
             name={element.name}
             phoneNumber={element.number}
-            deleteContact={deleteContact}
+            deleteContact={() => handleDeleteContact(element.id)}
           />
         </li>
       ))}
